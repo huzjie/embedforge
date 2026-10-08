@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  embedforge:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - EMBEDFORGE_BACKEND=mock
+    restart: unless-stopped

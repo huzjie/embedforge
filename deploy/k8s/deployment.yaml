@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: embedforge
+  labels:
+    app: embedforge
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: embedforge
+  template:
+    metadata:
+      labels:
+        app: embedforge
+    spec:
+      containers:
+        - name: embedforge
+          image: embedforge:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: EMBEDFORGE_BACKEND
+              value: "mock"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "embedforge.fullname" . }}
+  labels:
+    {{- include "embedforge.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 8000
+  selector:
+    {{- include "embedforge.selectorLabels" . | nindent 4 }}

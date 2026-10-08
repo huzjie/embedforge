@@ -1,0 +1,40 @@
+# embedforge default configuration
+# NOTE: the *runnable* reference uses dim=64 / img 8x8 so it runs on a CPU in
+# seconds. Production EmbeddingGemma 2 uses dim=768 (documented in docs/MRL.md
+# and docs/SCALING.md). Matryoshka widths are nested: 8 -> 16 -> 32 -> 64.
+model:
+  dim: 64
+  n_layers: 2
+  n_heads: 4
+  hidden: 128
+  vocab: 512
+  patch: 4
+  img_h: 8
+  img_w: 8
+  audio_frames: 16
+  mrl_dims: [8, 16, 32, 64]
+  prod_dim_hint: "768"
+
+backend:
+  name: mock
+  seed: 0
+  base_url: ""
+  api_key: ""
+  model: ""
+
+train:
+  epochs: 3
+  lr: 0.1
+  steps: 30
+  batch: 8
+  temperature: 0.07
+
+retrieval:
+  top_k: 10
+  pq_subvectors: 8
+  pq_centroids: 256
+
+serve:
+  host: "127.0.0.1"
+  port: 8000
+  auth_token: ""
